@@ -18,18 +18,28 @@ class BlogUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     fields = ('title','body',)
     template_name = 'post_edit.html'
     success_url = reverse_lazy('post_list')
+    def test_func(self): 
+        obj = self.get_object()
+        return obj.author == self.request.user
 
 class BlogDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView): 
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('post_list')
+    def test_func(self): 
+        obj = self.get_object()
+        return obj.author == self.request.user
+
 
 class BlogCreateView(LoginRequiredMixin,UserPassesTestMixin,CreateView): 
     model = Post
     template_name = 'post_new.html'
-    fields = ('title','body',)
+    fields = ('title','body')
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+    def test_func(self): 
+        obj = self.get_object()
+        return obj.author == self.request.user
 
 
