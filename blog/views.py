@@ -38,8 +38,6 @@ class BlogCreateView(LoginRequiredMixin,UserPassesTestMixin,CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-    def test_func(self): 
-        obj = self.get_object()
-        return obj.author == self.request.user
+   
 
 
