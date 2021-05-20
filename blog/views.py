@@ -31,7 +31,7 @@ class BlogDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
         return obj.author == self.request.user
 
 
-class BlogCreateView(LoginRequiredMixin,UserPassesTestMixin,CreateView): 
+class BlogCreateView(LoginRequiredMixin,CreateView): 
     model = Post
     template_name = 'post_new.html'
     fields = ('title','body')
